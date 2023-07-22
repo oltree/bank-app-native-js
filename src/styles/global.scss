@@ -6,7 +6,6 @@ button,
 body {
   font-family: $font;
 }
-
 body {
   background-color: #1b1d1f;
   color: $white;
@@ -20,7 +19,7 @@ input {
   color: $white;
 
   &::placeholder {
-    color: $text-gray;
+    color: $gray;
   }
 }
 

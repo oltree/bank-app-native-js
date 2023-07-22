@@ -19,11 +19,9 @@
   from {
     transform: scale(0.2);
   }
-
   60% {
     transform: scale(1.4);
   }
-
   to {
     transform: scale(1);
   }
@@ -37,11 +35,9 @@
   from {
     transform: rotate(58deg);
   }
-
   60% {
     transform: rotate(-40deg);
   }
-
   to {
     transform: rotate(0);
   }
