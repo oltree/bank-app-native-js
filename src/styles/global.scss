@@ -6,8 +6,7 @@ button,
 body {
   font-family: $font;
 }
-
-body {
+ы body {
   background-color: #1b1d1f;
   color: $white;
   font-size: 17px;
@@ -20,7 +19,7 @@ input {
   color: $white;
 
   &::placeholder {
-    color: $text-gray;
+    color: $gray;
   }
 }
 
