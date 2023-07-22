@@ -1,3 +1,4 @@
-export { Home } from './home/home.screen';
-export { Auth } from './auth/auth.screen';
-export { AboutUs } from './about-us/about-us.screen';
+export { Home } from './home/home.component';
+export { Auth } from './auth/auth.component';
+export { AboutUs } from './about-us/about-us.component';
+export { NotFound } from './not-found/not-found.component';
