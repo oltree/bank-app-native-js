@@ -1,9 +1,9 @@
 {
-  "arrowParens": "always",
+  "trailingComma": "es5",
+  "tabWidth": 2,
   "useTabs": false,
   "singleQuote": true,
-  "tabWidth": 2,
-  "semi": true,
+  "arrowParens": "always",
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
     "^@/core/(.*)$",
@@ -18,7 +18,7 @@
     "^@/services/(.*)$",
     "^@/store/(.*)$",
     "^@/api/(.*)$",
-    "^.+\\.(template\\.html|module\\.scss)$",
+    "(.scss)$",
     "^../(.*)",
     "^./(.*)"
   ],
