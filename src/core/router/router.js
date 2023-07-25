@@ -1,11 +1,14 @@
-import { NotFound } from '@/components/screens';
+import { Layout } from '@/components/layout/layout.component';
+import { NotFound } from '@/components/screens/not-found/not-found.component';
+
+import { $R } from '../rquery';
+
 import { ROUTES } from './routes.data';
-import { Layout } from '@/components/layout';
 
 export class Router {
   #routes = ROUTES;
-  #currentRoute = undefined;
-  #layout = undefined;
+  #currentRoute = null;
+  #layout = null;
 
   constructor() {
     window.addEventListener('popstate', () => {
@@ -13,31 +16,29 @@ export class Router {
     });
 
     this.#handleRouteChange();
-    this.#handleClickLink();
+    this.#handleLinks();
   }
 
-  #handleClickLink() {
+  #handleLinks() {
     document.addEventListener('click', (event) => {
       const target = event.target.closest('a');
 
       if (target) {
         event.preventDefault();
-
         this.navigate(target.href);
       }
     });
   }
 
+  getCurrentPath() {
+    return window.location.pathname;
+  }
+
   navigate(path) {
     if (path !== this.getCurrentPath()) {
       window.history.pushState({}, '', path);
-
       this.#handleRouteChange();
     }
-  }
-
-  getCurrentPath() {
-    return window.location.pathname;
   }
 
   #handleRouteChange() {
@@ -51,22 +52,21 @@ export class Router {
     }
 
     this.#currentRoute = route;
-
     this.#render();
   }
 
   #render() {
-    const component = new this.#currentRoute.component(); // this.#currentRoute.component() - dinamic class from ROUTES
+    const component = new this.#currentRoute.component().render();
 
     if (!this.#layout) {
       this.#layout = new Layout({
-        router: this, // all methods class Router
-        children: component.render(),
-      });
+        router: this,
+        children: component,
+      }).render();
 
-      document.getElementById('app').innerHTML = this.#layout.render();
+      $R('#app').append(this.#layout);
     } else {
-      document.querySelector('main').innerHTML = component.render();
+      $R('#content').html('').append(component);
     }
   }
 }
