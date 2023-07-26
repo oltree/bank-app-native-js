@@ -90,7 +90,7 @@ class RQuery {
    */
   css(property, value) {
     if (typeof property !== 'string' || typeof value !== 'string') {
-      throw new Error('property and value must be strings');
+      throw new Error('Property and value must be strings!');
     }
 
     this.element.style[property] = value;

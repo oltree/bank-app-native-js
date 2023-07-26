@@ -7,8 +7,8 @@ import { ROUTES } from './routes.data';
 
 export class Router {
   #routes = ROUTES;
-  #currentRoute = null;
-  #layout = null;
+  #currentRoute = undefined;
+  #layout = undefined;
 
   constructor() {
     window.addEventListener('popstate', () => {
@@ -16,15 +16,16 @@ export class Router {
     });
 
     this.#handleRouteChange();
-    this.#handleLinks();
+    this.#handleClickLink();
   }
 
-  #handleLinks() {
+  #handleClickLink() {
     document.addEventListener('click', (event) => {
       const target = event.target.closest('a');
 
       if (target) {
         event.preventDefault();
+
         this.navigate(target.href);
       }
     });
@@ -37,6 +38,7 @@ export class Router {
   navigate(path) {
     if (path !== this.getCurrentPath()) {
       window.history.pushState({}, '', path);
+
       this.#handleRouteChange();
     }
   }
@@ -52,15 +54,16 @@ export class Router {
     }
 
     this.#currentRoute = route;
+
     this.#render();
   }
 
   #render() {
-    const component = new this.#currentRoute.component().render();
+    const component = new this.#currentRoute.component().render(); // this.#currentRoute.component() - dinamic class from ROUTES
 
     if (!this.#layout) {
       this.#layout = new Layout({
-        router: this,
+        router: this, // all methods class Router
         children: component,
       }).render();
 
