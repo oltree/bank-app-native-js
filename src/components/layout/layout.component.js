@@ -1,11 +1,11 @@
 import { ChildComponent } from '@/core/component';
-import { $R } from '@/core/rquery';
 import { RenderService } from '@/core/services';
+import { $R } from '@/core/rquery';
 
 import styles from './layout.module.scss';
 import template from './layout.template.html';
 
-import { Header } from './header/header.component';
+import { Header } from './header';
 
 export class Layout extends ChildComponent {
   constructor({ router, children }) {
