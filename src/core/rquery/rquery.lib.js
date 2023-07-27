@@ -1,3 +1,5 @@
+import { formatCardNumberWithDashes } from '@/utils/format/format-card-number';
+
 /**
  * Represents the RQuery class for working with DOM elements.
  */
@@ -94,6 +96,127 @@ class RQuery {
     }
 
     this.element.style[property] = value;
+
+    return this;
+  }
+
+  /**
+   * Adds a class or a list of classes to the current element.
+   * @param {string | string[]} classNames - a single class name or an array of class names to add to the element.
+   * @returns {RQuery} - the current RQuery instance for chaining.
+   */
+  addClass(classNames) {
+    if (Array.isArray(classNames)) {
+      for (const className of classNames) {
+        this.element.classList.add(className);
+      }
+    } else {
+      this.element.classList.add(classNames);
+    }
+
+    return this;
+  }
+
+  /**
+   * Removes a class or a list of classes from the current element.
+   * @param {string | string[]} classNames - a single class name or an array of class names to remove from the element.
+   * @returns {RQuery} - the current RQuery instance for chaining.
+   */
+  removeClass(classNames) {
+    if (Array.isArray(classNames)) {
+      for (const className of classNames) {
+        this.element.classList.remove(className);
+      }
+    } else {
+      this.element.classList.remove(classNames);
+    }
+
+    return this;
+  }
+
+  /**
+   * Attach a click event listener to the selected element.
+   * @param {function(Event): void} callback - the event listener function to execute when the selected element is clicked. The function will receive the event object as its argument.
+   * @returns {RQuery} - the current RQuery instance for chaining.
+   */
+  click(callback) {
+    this.element.addEventListener('click', callback);
+
+    return this;
+  }
+
+  /**
+   * Set attributes and event listeners for an input element.
+   * @param {object} options - an object containing input options.
+   * @param {function(Event): void} [options.onInput] - the event listener for the input's input event.
+   * @param {object} [options.rest] - optional attributes to set on the input element.
+   * @returns {RQuery} - the current RQuery instance for chaining.
+   */
+  input({ onInput, ...rest }) {
+    if (this.element.tagName.toLowerCase() !== 'input') {
+      throw new Error('Element must be an input!');
+    }
+
+    for (const [key, value] of Object.entries(rest)) {
+      this.element.setAttribute(key, value);
+    }
+
+    if (onInput) {
+      this.element.addEventListener('input', onInput);
+    }
+
+    return this;
+  }
+
+  /**
+   * Set attributes and event listeners for a number input element.
+   * @param {number} [limit] - the maximum length of input value.
+   * @returns {RQuery} - the current RQuery instance for chaining.
+   */
+  numberInput(limit) {
+    if (
+      this.element.tagName.toLowerCase() !== 'input' ||
+      this.element.type !== 'number'
+    ) {
+      throw new Error('Element must be an input with type "number"!');
+    }
+
+    this.element.addEventListener('input', (event) => {
+      let value = event.target.value.replace(/[^0-9]/g, '');
+
+      if (limit) {
+        value = value.substring(0, limit);
+      }
+
+      event.target.value = value;
+    });
+
+    return this;
+  }
+
+  /**
+   * Set attributes and event listeners for a credit card input element.
+   * @returns {RQuery} - the current RQuery instance for chaining.
+   */
+  creditCardInput() {
+    const cardNumberLimit = 16;
+
+    if (
+      this.element.tagName.toLowerCase() !== 'input' ||
+      this.element.type !== 'text'
+    ) {
+      throw new Error('Element must be an input with type "text"!');
+    }
+
+    this.element.addEventListener('input', (event) => {
+      let value = event.target.value.replace(/[^0-9]/g, '');
+
+      if (cardNumberLimit) {
+        value = value.substring(0, cardNumberLimit);
+      }
+
+      event.target.value = formatCardNumberWithDashes(value);
+    });
 
     return this;
   }
