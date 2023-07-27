@@ -3,7 +3,7 @@
 
 .button {
   @include transition(background-color);
-  background-color: $gray;
+  background-color: $dark-gray;
   color: $white;
   border-radius: $radius;
   padding: 12px 30px;
@@ -17,7 +17,7 @@
   }
 
   &:hover {
-    background-color: lighten($gray, 3%);
+    background-color: lighten($dark-gray, 3%);
   }
 
   &.green {
