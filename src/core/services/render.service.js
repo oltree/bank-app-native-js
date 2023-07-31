@@ -34,7 +34,9 @@ class RenderService {
       const elementTagName = element.tagName.toLowerCase();
 
       if (componentTagPattern.test(elementTagName)) {
-        const componentName = elementTagName.replace(componentTagPattern, '');
+        const componentName = elementTagName
+          .replace(componentTagPattern, '')
+          .replace(/-/g, '');
 
         const foundComponent = components.find((component) => {
           const instance =
