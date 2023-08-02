@@ -6,6 +6,7 @@ import styles from './layout.module.scss';
 import template from './layout.template.html';
 
 import { Header } from './header';
+import { Notification } from './notification';
 
 export class Layout extends ChildComponent {
   constructor({ router, children }) {
@@ -16,7 +17,11 @@ export class Layout extends ChildComponent {
   }
 
   render() {
-    this.element = RenderService.htmlToElement(template, [], styles);
+    this.element = RenderService.htmlToElement(
+      template,
+      [Notification],
+      styles
+    );
 
     const mainElement = $R(this.element).find('main');
 
