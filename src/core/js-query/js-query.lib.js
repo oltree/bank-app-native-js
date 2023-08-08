@@ -1,6 +1,8 @@
 import { SERVER_URL } from '@/config/url.config';
 
 import { extractErrorMessage } from './extract-error-message';
+import { NotificationService, StorageService } from '../services';
+import { ACCESS_TOKEN_KEY } from '@/constants/auth.constants';
 
 /**
  * JSQuery is a library for handling API requests.
@@ -29,7 +31,7 @@ export const JSQuery = async ({
 
   const url = `${SERVER_URL}/api${path}`;
 
-  const accessToken = '';
+  const accessToken = new StorageService().getItem(ACCESS_TOKEN_KEY);
 
   const requestOptions = {
     method,
@@ -64,7 +66,7 @@ export const JSQuery = async ({
         onError(errorMessage);
       }
 
-      /* Notification error */
+      new NotificationService().show('error', errorMessage);
     }
   } catch (error) {
     const errorMessage = extractErrorMessage(error);
