@@ -1,11 +1,12 @@
 import { JSQuery } from '@/core/js-query';
 import { NotificationService } from '@/core/services';
+import { Store } from '@/core/store';
 
 export class AuthService {
   #BASE_URL = '/auth';
 
   constructor() {
-    // working with store!
+    this.store = Store.getInstance();
 
     this.notificationService = new NotificationService();
   }
@@ -28,8 +29,8 @@ export class AuthService {
     return JSQuery({
       path: `${this.#BASE_URL}/login`,
       body,
-      onSuccess: (/* data */) => {
-        // put data in the store
+      onSuccess: (data) => {
+        this.store.login(data.user, data.accessToken);
 
         this.notificationService.show(
           'success',

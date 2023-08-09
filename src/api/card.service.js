@@ -1,11 +1,12 @@
 import { JSQuery } from '@/core/js-query';
 import { NotificationService } from '@/core/services';
+import { Store } from '@/core/store';
 
 export class CardService {
   #BASE_URL = '/cards';
 
   constructor() {
-    // working with store!
+    this.store = Store.getInstance();
 
     this.notificationService = new NotificationService();
   }
@@ -48,13 +49,13 @@ export class CardService {
    * @param {Function} onSuccess - the callback function to be executed upon successful transfer.
    * @returns {Promise} - a promise that resolves with the redQuery response.
    */
-  transfer(body, onSuccess) {
+  transfer({ amount, toCardNumber }, onSuccess) {
     return JSQuery({
       path: `${this.#BASE_URL}/transfer-money`,
       body: {
-        amount: Number(body.amount),
-        // fromCardNumber: this.store.user.card.number,
-        // body.toCardNumber
+        amount: Number(amount),
+        fromCardNumber: this.store.user.card.number,
+        toCardNumber,
       },
       onSuccess: () => {
         this.notificationService.show(
