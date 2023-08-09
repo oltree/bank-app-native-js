@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Field } from '@/components/ui/field';
 
 import { $R } from '@/core/rquery';
-import { RenderService } from '@/core/services';
+import { FormService, RenderService, ValidationService } from '@/core/services';
 import { ScreenComponent } from '@/core/component';
 
 import styles from './auth.module.scss';
@@ -19,8 +19,27 @@ export class Auth extends ScreenComponent {
     this.authService = new AuthService();
   }
 
+  #validateFields(formValues) {
+    const emailLabel = $R(this.element).find('label:first-child');
+    const passwordLabel = $R(this.element).find('label:last-child');
+
+    if (!formValues.email) {
+      ValidationService.showError(emailLabel);
+    }
+
+    if (!formValues.password) {
+      ValidationService.showError(passwordLabel);
+    }
+
+    return formValues.email && formValues.password;
+  }
+
   #handleSubmit = (event) => {
-    console.log(event.target);
+    const formValues = FormService.getFormValues(event.target);
+
+    if (!this.#validateFields(formValues)) {
+      return;
+    }
   };
 
   #changeFormType = (event) => {
