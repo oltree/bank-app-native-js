@@ -40,6 +40,10 @@ export class Auth extends ScreenComponent {
     if (!this.#validateFields(formValues)) {
       return;
     }
+
+    this.#isTypeLogin
+      ? this.authService.login(formValues)
+      : this.authService.register(formValues);
   };
 
   #changeFormType = (event) => {
