@@ -1,5 +1,7 @@
 import { ChildComponent } from '@/core/component';
 import { RenderService } from '@/core/services';
+import { $R } from '@/core/rquery';
+import { Store } from '@/core/store';
 
 import { UserItem } from '@/components/ui/user-item';
 
@@ -14,7 +16,31 @@ export class Header extends ChildComponent {
   constructor({ router }) {
     super();
 
+    this.store = Store.getInstance();
+    this.store.addObserver(this);
+
     this.router = router;
+
+    this.userItem = new UserItem({
+      avatarPath: '/',
+      name: 'User',
+    });
+  }
+
+  update() {
+    this.user = this.store.state.user;
+
+    const authSideElement = $R(this.element).find('#auth-side');
+
+    if (this.user) {
+      authSideElement.show();
+
+      this.userItem.update(this.user);
+
+      this.router.navigate('/');
+    } else {
+      authSideElement.hide();
+    }
   }
 
   render() {
@@ -26,14 +52,12 @@ export class Header extends ChildComponent {
           router: this.router,
         }),
         Search,
-        new UserItem({
-          avatarPath:
-            'https://prisma-blog-ebon.vercel.app/blog/posts/type-safe_js_with_JsDoc.png',
-          name: 'Oleg',
-        }),
+        this.userItem,
       ],
       styles
     );
+
+    this.update();
 
     return this.element;
   }

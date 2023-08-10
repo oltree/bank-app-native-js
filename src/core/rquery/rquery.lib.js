@@ -100,6 +100,26 @@ class RQuery {
   }
 
   /**
+   * Shows the selected element by removing the 'display' style property.
+   * @returns {RQuery} - the current RQuery instance for chaining.
+   */
+  show() {
+    this.element.style.removeProperty('display');
+
+    return this;
+  }
+
+  /**
+   * Hides the selected element by setting its display style to 'none'.
+   * @returns {RQuery} - the current RQuery instance for chaining.
+   */
+  hide() {
+    this.element.style.display = 'none';
+
+    return this;
+  }
+
+  /**
    * Set the CSS style of the selected element.
    * @param {string} property - the CSS property to set.
    * @param {string} value - the value to set for the CSS property.
@@ -167,6 +187,24 @@ class RQuery {
 
       return this;
     }
+  }
+
+  /**
+   * Add an event listener to the selected element for the specified event type.
+   * @param {string} eventType - the type of event to listen for (e.g., 'click', 'input', etc.).
+   * @param {function(Event): void} callback - the event listener function to execute when the event is triggered. The function will receive the event object as its argument.
+   * @returns {RQuery} - the current RQuery instance for chaining.
+   */
+  on(eventType, callback) {
+    if (typeof eventType !== 'string' || typeof callback !== 'function') {
+      throw new Error(
+        'eventType must be a string and callback must be a function'
+      );
+    }
+
+    this.element.addEventListener(eventType, callback);
+
+    return this;
   }
 
   /**
