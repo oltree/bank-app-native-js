@@ -38,6 +38,17 @@ class RQuery {
   }
 
   /**
+   * Find all elements that match the specified selector within the selected element.
+   * @param {string} selector - a CSS selector string to search for within the selected element.
+   * @returns {RQuery[]} - an array of new RQuery instances for the found elements.
+   */
+  findAll(selector) {
+    const elements = this.element.querySelectorAll(selector);
+
+    return Array.from(elements).map((element) => new RQuery(element));
+  }
+
+  /**
    * Append a new element as a child of the selected element.
    * @param {HTMLElement} childElement - the new child element to append.
    * @returns {RQuery} - the current RQuery instance for chaining.
