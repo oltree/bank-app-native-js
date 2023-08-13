@@ -201,6 +201,21 @@ class RQuery {
   }
 
   /**
+   * Removes an attribute from the current element.
+   * @param {string} attributeName - the name of the attribute to remove.
+   * @return {RQuery} - returns the RQuery instance.
+   */
+  removeAttribute(attributeName) {
+    if (typeof attributeName !== 'string') {
+      throw new Error('Attribute name must be a string!');
+    }
+
+    this.element.removeAttribute(attributeName);
+
+    return this;
+  }
+
+  /**
    * Add an event listener to the selected element for the specified event type.
    * @param {string} eventType - the type of event to listen for (e.g., 'click', 'input', etc.).
    * @param {function(Event): void} callback - the event listener function to execute when the event is triggered. The function will receive the event object as its argument.
@@ -245,6 +260,21 @@ class RQuery {
     }
 
     return this;
+  }
+
+  /**
+   * Gets or sets the value of an input element.
+   * @param {string} [newValue] - the new value to set for the input element. If not provided, the method returns the current value.
+   * @return {string|RQuery} - if newValue is provided, returns the RQuery instance. Otherwise, returns the current value of the input element.
+   */
+  value(newValue) {
+    if (typeof newValue === 'undefined') {
+      return this.element.value;
+    } else {
+      this.element.value = newValue;
+
+      return this;
+    }
   }
 
   /**
