@@ -1,12 +1,14 @@
 import { UserService } from '@/api/user.service';
 
 import { UserItem } from '@/components/ui/user-item';
+import { TRANSFER_FIELD_SELECTOR } from '@/components/screens/home/contacts/transfer-field';
 
 import { ChildComponent } from '@/core/component';
 import { RenderService } from '@/core/services';
 import { $R } from '@/core/rquery';
 
 import { debounce } from '@/utils/debounce.util';
+import { formatCardNumberWithDashes } from '@/utils/format/format-card-number';
 
 import styles from './search.module.scss';
 import template from './search.template.html';
@@ -33,7 +35,11 @@ export class Search extends ChildComponent {
 
       users.forEach((user, index) => {
         const userItem = new UserItem(user, true, () => {
-          searchResultElement.html(''); // доработать после добавления операций с деньгами
+          $R(TRANSFER_FIELD_SELECTOR).value(
+            formatCardNumberWithDashes(user.card.number)
+          );
+
+          searchResultElement.html('');
         }).render();
 
         $R(userItem)
