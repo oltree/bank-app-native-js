@@ -1,8 +1,7 @@
 import { ChildComponent } from '@/core/component';
 import { RenderService } from '@/core/services';
-import { $R } from '@/core/rquery';
+// import { $R } from '@/core/rquery';
 
-import styles from './loader.module.scss';
 import template from './loader.template.html';
 
 export const LOADER_SELECTOR = '[data-component="loader"]';
@@ -16,12 +15,16 @@ export class Loader extends ChildComponent {
   }
 
   render() {
-    this.element = RenderService.htmlToElement(template, [], styles);
+    this.element = RenderService.htmlToElement(template, []);
 
-    $R(this.element)
+    // не добавляет из-за плохой svg
+    /* $R(this.element)
       .css('width', `${this.width}px`)
       .css('height', `${this.height}px`)
-      .addClass('bounce');
+      .addClass('bounce'); */
+
+    this.element.style = `width: ${this.width}px; height: ${this.height}px`;
+    this.element.classList.add('bounce');
 
     return this.element;
   }

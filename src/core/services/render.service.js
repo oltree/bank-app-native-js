@@ -8,10 +8,14 @@ class RenderService {
    * @returns {HTMLElement}
    */
   htmlToElement(html, components = [], styles) {
-    const template = document.createElement('template');
-    template.innerHTML = html.trim();
+    // менее безопасный вариант, но используется только для передачи чистого html-шаблона без приватный данных, так что ок
+    /* const template = document.createElement('template'); 
+    template.innerHTML = html.trim(); // - innerHTML небезопасная тема
+    const element = template.content.firstChild; */
 
-    const element = template.content.firstChild;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const element = doc.body.firstChild;
 
     if (styles) {
       this.#applyModuleStyles(styles, element);
