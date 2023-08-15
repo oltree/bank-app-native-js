@@ -4,6 +4,7 @@ import { RenderService } from '@/core/services';
 import { CardInfo } from './card-info';
 import { Actions } from './actions';
 import { Contacts } from './contacts';
+import { Statistics } from './statistics';
 import { Transactions } from './transactions';
 
 import styles from './home.module.scss';
@@ -17,7 +18,7 @@ export class Home extends ScreenComponent {
   render() {
     const element = RenderService.htmlToElement(
       template,
-      [CardInfo, Transactions, Actions, Contacts],
+      [CardInfo, Transactions, Statistics, Actions, Contacts],
       styles
     );
 
