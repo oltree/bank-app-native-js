@@ -5,6 +5,8 @@ import { Store } from '@/core/store';
 import { RenderService } from '@/core/services';
 import { $R } from '@/core/rquery';
 
+import { Loader } from '@/components/ui/loader';
+
 import { BALANCE_UPDATED } from '@/constants/event.constants';
 import { DEFAULT_TIMEOUT } from '@/constants/time.constants';
 
@@ -106,7 +108,9 @@ export class CardInfo extends ChildComponent {
 
   render() {
     if (this.store.state.user) {
-      this.fetchData();
+      $R(this.element).html(new Loader().render());
+
+      setTimeout(() => this.fetchData(), 500);
     }
 
     return this.element;
