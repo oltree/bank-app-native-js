@@ -7,6 +7,7 @@ The "Bank App" project is a web application designed for managing banking operat
 - A Singleton pattern implementation for storage.
 - A library for handling and making API requests.
 - A library for working with DOM elements.
+  
 This core functionality forms the backbone of the application, enabling seamless management of banking tasks and interactions.
 
 ## Functionality
