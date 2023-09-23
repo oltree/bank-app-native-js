@@ -32,11 +32,6 @@ This core functionality forms the backbone of the application, enabling seamless
 - **Sass:** A CSS preprocessor that allows the use of variables, nesting, and other features.
 - **Prettier:** A code formatting tool. 
 
-## Available Scripts
-
-- **yarn dev:** Runs the application in development mode. Open http://localhost:3000 to view it in your browser. The page will reload when you make changes. You may also see any lint errors in the console.
-- **yarn build:** Builds the application for production into the build folder. It properly bundles React in production mode and optimizes the build for the best performance.
-
 ## Contact
 
 For any inquiries or support, please contact Oleg Melekh at oleg.melekh.frontend@gmail.com.
