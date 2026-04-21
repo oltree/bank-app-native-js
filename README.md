@@ -1,8 +1,8 @@
-# Bank App — Native JavaScript SPA
+# Bank App - Native JavaScript SPA
 
 > **[Читать на русском](README.ru.md)**
 
-A fully functional single-page banking application built **entirely with vanilla JavaScript** — no React, no Vue, no Angular. Every architectural piece (router, state management, component system, DOM library, HTTP client) is implemented from scratch, demonstrating deep mastery of core web technologies.
+A fully functional single-page banking application built **entirely with vanilla JavaScript** - no React, no Vue, no Angular. Every architectural piece (router, state management, component system, DOM library, HTTP client) is implemented from scratch, demonstrating deep mastery of core web technologies.
 
 ---
 
@@ -23,7 +23,7 @@ A fully functional single-page banking application built **entirely with vanilla
 
 ## Overview
 
-This project was built as a demonstration that a production-quality SPA does not require a framework. Every pattern you find in modern frontend frameworks — reactive state, component lifecycle, client-side routing, scoped styles — is implemented here in pure JavaScript.
+This project was built as a demonstration that a production-quality SPA does not require a framework. Every pattern you find in modern frontend frameworks - reactive state, component lifecycle, client-side routing, scoped styles - is implemented here in pure JavaScript.
 
 The application simulates a real banking interface: users can authenticate, view their card and balance, top-up/withdraw funds, transfer money to other users, explore transaction history, and see income/expense analytics via a custom-drawn donut chart.
 
@@ -34,7 +34,7 @@ The application simulates a real banking interface: users can authenticate, view
 ### Authentication
 - User registration and login with email + password
 - JWT Bearer token authentication
-- Persistent session via `localStorage` — survives page refresh
+- Persistent session via `localStorage` - survives page refresh
 - Automatic logout with full state cleanup
 
 ### Card & Balance Management
@@ -79,14 +79,14 @@ The application simulates a real banking interface: users can authenticate, view
 A custom router built on the History API (`window.history.pushState`). A single click handler on `document` intercepts navigation links; routes are defined as a path → component map in `routes.data.js`. Unknown paths fall back to a 404 component automatically.
 
 ### Reactive State (Observer Pattern)
-A **Singleton Store** (`Store.getInstance()`) holds the entire application state. It uses a JavaScript `Proxy` to intercept every `set` operation and notify all registered observer components. No Redux, no MobX — just the Observer pattern applied cleanly.
+A **Singleton Store** (`Store.getInstance()`) holds the entire application state. It uses a JavaScript `Proxy` to intercept every `set` operation and notify all registered observer components. No Redux, no MobX - just the Observer pattern applied cleanly.
 
 State is two-way synced with `localStorage`, so the user's session and card data persist across browser sessions.
 
 ### Component System
 Two base classes drive the UI:
-- `ScreenComponent` — page-level views (manages `document.title`, renders into `#app`)
-- `ChildComponent` — reusable sub-components (card info, transactions list, donut chart, etc.)
+- `ScreenComponent` - page-level views (manages `document.title`, renders into `#app`)
+- `ChildComponent` - reusable sub-components (card info, transactions list, donut chart, etc.)
 
 HTML templates are stored as `.html` files and parsed by `RenderService` using `DOMParser`. Custom `<component-*>` tags are resolved and replaced with live component instances.
 
@@ -119,7 +119,7 @@ The `/core` directory contains a complete mini-framework built from scratch:
 | `core/services/validation.service.js` | Field validation with error display |
 | `core/services/notification.service.js` | Toast notification queue |
 
-**RQuery** (the DOM library) supports: `find`, `findAll`, `append`, `html`, `text`, `addClass`, `removeClass`, `css`, `show`, `hide`, `click`, `submit`, `on`, `value`, `attribute`, `numberInput`, `creditCardInput` — all chainable.
+**RQuery** (the DOM library) supports: `find`, `findAll`, `append`, `html`, `text`, `addClass`, `removeClass`, `css`, `show`, `hide`, `click`, `submit`, `on`, `value`, `attribute`, `numberInput`, `creditCardInput` - all chainable.
 
 ---
 
@@ -127,7 +127,7 @@ The `/core` directory contains a complete mini-framework built from scratch:
 
 ```
 src/
-├── api/                    # Service layer — one file per API domain
+├── api/                    # Service layer - one file per API domain
 │   ├── auth.service.js
 │   ├── card.service.js
 │   ├── transaction.service.js
@@ -213,10 +213,10 @@ All API calls go through the custom `JSQuery` HTTP client. The token is injected
 | Accent | `#08f0c8` (cyan) |
 | Font | Inter (system stack fallback) |
 
-Animations: `fade-in` (dynamic content entrance) and `drawing` (link underline reveal) — both defined as CSS keyframes.
+Animations: `fade-in` (dynamic content entrance) and `drawing` (link underline reveal) - both defined as CSS keyframes.
 
 ---
 
 ## Contact
 
-**Oleg Melekh** — oleg.melekh.frontend@gmail.com
+**Oleg Melekh** - oleg.melekh.frontend@gmail.com
